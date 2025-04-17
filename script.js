@@ -12,7 +12,7 @@ function addTask() {
     let li = document.createElement("li");
     li.innerHTML = inputBox.value;
     listContainer.appendChild(li);
-    
+
     // Add delete button (x) to list item
     let span = document.createElement("span");
     span.innerHTML = "\u00d7";
@@ -23,6 +23,13 @@ function addTask() {
   saveData();
 }
 
+// Add keyboard event listener for enter key
+inputBox.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    addTask();
+  }
+});
+
 // Event listener for clicking tasks and delete buttons
 listContainer.addEventListener(
   "click",
@@ -31,7 +38,7 @@ listContainer.addEventListener(
     if (e.target.tagName === "LI") {
       e.target.classList.toggle("checked");
       saveData();
-    } 
+    }
     // Remove task when clicking delete button
     else if (e.target.tagName === "SPAN") {
       e.target.parentElement.remove();
